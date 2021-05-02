@@ -7,7 +7,14 @@ function Timeline(props) {
   const [dados, recebedados] = useState([])
 
   async function verifica_tweets(){
-    const resultado = await fetch(`https://j0rjodfah4.execute-api.us-east-1.amazonaws.com/backend-redesocial-lc`)
+
+    var myHeaders = new Headers();
+    myHeaders.append("Access-Control-Allow-Origin", "https://master.d2xi5qs55mh3wx.amplifyapp.com/");
+    var myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors',
+               cache: 'default' };
+    const resultado = await fetch(`https://j0rjodfah4.execute-api.us-east-1.amazonaws.com/backend-redesocial-lc`,myInit)
     var data =  await resultado.json()
     return data
   }
