@@ -4,6 +4,7 @@ import { Nav } from 'react-bootstrap';
 import Escrever from './Escrever';
 import Timeline from './Timeline';
 import { Link, Route, BrowserRouter } from "react-router-dom";
+import { useState } from 'react';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         <Timeline posts='timeline' />
         </Route>
         <Route path="/my-posts">
-        <Timeline posts='myposts'/>
+        <Timeline usuario='felipenick'/>
         </Route>
       </BrowserRouter>
       </div>

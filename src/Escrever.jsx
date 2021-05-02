@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 function Escrever() {
@@ -30,11 +30,9 @@ function Escrever() {
                     body: post
                    }
 
-    console.log(metodo)
-
     const resultado = await fetch(`https://j0rjodfah4.execute-api.us-east-1.amazonaws.com/backend-redesocial-lc`, metodo)
 
-    console.log(resultado)
+    alteratexto('')
   
   }
 

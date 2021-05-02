@@ -11,7 +11,18 @@ function Timeline(props) {
     
     const resultado = await fetch(`https://j0rjodfah4.execute-api.us-east-1.amazonaws.com/backend-redesocial-lc`)
     var data =  await resultado.json()
-    return data
+
+    if(props.usuario){
+       var posts_filtrados = data.filter(function(postagem){
+          return (postagem.usuario == props.usuario)
+      })
+      return posts_filtrados
+    }
+
+    else {
+      return data
+    }
+
   }
 
   useEffect( async () => {
