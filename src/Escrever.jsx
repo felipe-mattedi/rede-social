@@ -17,20 +17,24 @@ function Escrever() {
     var months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
     var data = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear()
 
-    var post = [
+    var post = JSON.stringify(
       { 
         "usuario" : "felipenick",
         "post": texto,
         "data": data
-      }
-    ]
+      })
+    
   
     var metodo = { 
                     method: 'PUT',
                     body: post
                    }
 
+    console.log(metodo)
+
     const resultado = await fetch(`https://j0rjodfah4.execute-api.us-east-1.amazonaws.com/backend-redesocial-lc`, metodo)
+
+    console.log(resultado)
   
   }
 
