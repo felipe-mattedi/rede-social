@@ -1,13 +1,28 @@
 import './App.css';
-import { Card, CardImg } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Card } from 'react-bootstrap';
+import { useState } from 'react';
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as faHeartR} from '@fortawesome/free-regular-svg-icons'
 
 function Postagem(props) {
 
   var post = props.post
+  const [coracao, atualizacoracao] = useState(false)
+  const [curtidas, atualizacurtidas] = useState(post.curtidas)
+
+  function solidheart(){
+    atualizacoracao(true)
+  }
+
+  function heart(){
+    atualizacoracao(false)
+
+  }
 
   async function atualizacurtida (){
 
-    var post = JSON.stringify(
+    var params = JSON.stringify(
       { 
         "id" : post.id
       })
@@ -15,10 +30,12 @@ function Postagem(props) {
   
     var metodo = { 
                     method: 'PUT',
-                    body: post
+                    body: params
                    }
 
     const resultado = await fetch(`https://j0rjodfah4.execute-api.us-east-1.amazonaws.com/backend-redesocial-lc/curtir`, metodo)
+
+    atualizacurtidas(curtidas+1)
 
   }
 
@@ -28,7 +45,7 @@ function Postagem(props) {
       <Card.Body>
       <p>{post.post}</p>
       <p><b>{post.data} @{post.usuario}</b></p>
-      <Card.Link href="#" onClick={atualizacurtida}>Amei!</Card.Link> {post.curtidas}
+      <Card.Link><FontAwesomeIcon id='4'  onMouseEnter={solidheart} onMouseLeave={heart} icon={coracao ? faHeart: faHeartR} size='1x' onClick={atualizacurtida}/></Card.Link> {curtidas}
       </Card.Body>
     </Card>
   </div> 

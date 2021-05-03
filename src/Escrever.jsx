@@ -1,10 +1,12 @@
 import './App.css';
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Redirect, Route, useHistory } from "react-router-dom";
 
 function Escrever() {
 
   const [texto, alteratexto] = useState('')
+  const history = useHistory();
 
   const modificatexto = (evento) => {
     if(evento.target.value.length <= 300){
@@ -19,7 +21,7 @@ function Escrever() {
 
     var post = JSON.stringify(
       { 
-        "usuario" : "felipenick",
+        "usuario" : localStorage.getItem('redesocial'),
         "post": texto,
         "data": data
       })
@@ -33,11 +35,13 @@ function Escrever() {
     const resultado = await fetch(`https://j0rjodfah4.execute-api.us-east-1.amazonaws.com/backend-redesocial-lc`, metodo)
 
     alteratexto('')
+
+    history.push('/timeline')
   
   }
 
   return (
-    <div className='postagem'>
+    <div className='caixa-input'>
       <Form>
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>O que você está pensando?</Form.Label>

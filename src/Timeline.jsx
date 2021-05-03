@@ -1,11 +1,19 @@
 import './App.css';
 import Postagem from './Postagem';
 import { useState, useEffect } from 'react';
+import MainLogado from './MainLogado';
+import Escrever from './Escrever';
 
 function Timeline(props) {
 
   const [dados, recebedados] = useState([])
+  const [usuario, alterausuario] = useState()
 
+  if (usuario != props.usuario){
+    console.log(props.usuario)
+    alterausuario(props.usuario)
+  } 
+  
   async function verifica_tweets(){
 
     
@@ -14,6 +22,7 @@ function Timeline(props) {
 
     if(props.usuario){
        var posts_filtrados = data.filter(function(postagem){
+         console.log(postagem.usuario)
           return (postagem.usuario == props.usuario)
       })
       return posts_filtrados
@@ -31,7 +40,7 @@ function Timeline(props) {
   ,[])
 
   return (
-  <div>  
+  <div>
     {  
     dados.map(function(postagem){
     return <Postagem post={postagem}/>

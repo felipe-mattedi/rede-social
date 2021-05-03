@@ -37,18 +37,34 @@
   }
 }
 
-.main-app{
-  display: flex;
 
-}
 
 .ident-user{
+  display: flex;
+  flex-direction: column;
   margin-right: 5rem;
   text-align: center;
 }
 
-.nav-bar{
-  margin-bottom: 1rem!important;
+.dados-acesso{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0 1rem 0;
+  text-align: center;
+
+}
+
+.container-topo{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.cabecalho-logado{
+  display: flex;
+  align-items: center;
 }
 
 .barra-esquerda{
@@ -58,14 +74,32 @@
 .postagem{
   width: 100%;
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .postagem-unica{
+  width: 60%;
   min-height: 8rem;
+}
+
+.caixa-input{
+  width: 60%;
+  margin: 0 0 0 auto;
 }
 
 .botao {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.box-senha{
+  width: 30%;
+  margin: auto auto;
+}
+
+.alerta-senha{
+  margin-top: 1rem;
 }

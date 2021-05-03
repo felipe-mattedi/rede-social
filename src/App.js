@@ -3,42 +3,42 @@ import { Card } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import Escrever from './Escrever';
 import Timeline from './Timeline';
-import { Link, Route, BrowserRouter } from "react-router-dom";
+import Logout from './Logout';
+import Login from './Login';
+import PrivateRoute from './PrivateRoute';
+import MainLogado from './MainLogado';
+import { Link, Route, BrowserRouter, Switch } from "react-router-dom";
 import { useState } from 'react';
 
 function App() {
+
+  var log_user = localStorage.getItem('redesocial')
+
   return (
     <div className="main-app">
-      <div>
-        <Card className='ident-user' style={{ width: '18rem' }}>
-          <Card.Body>
-            <Card.Title>@felipenick</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">Usuário Logado</Card.Subtitle>
-            <Card.Link href="#">Logout</Card.Link>
-            <Card.Link href="#">Alterar Foto</Card.Link>
-          </Card.Body>
-        </Card>
-      </div>
-      <div className='barra-esquerda'>
       <BrowserRouter>
-        <Nav className='nav-bar' variant="tabs" defaultActiveKey="/home">
-          <Nav.Item>
-            <Nav.Link eventKey="link-0"><Link to="/timeline">Timeline</Link></Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="link-1"><Link to="/my-posts">Minhas postagens</Link></Nav.Link>
-          </Nav.Item>
-        </Nav>
+      <Switch>
+        <PrivateRoute  path="/timeline">
+        <MainLogado usuario={log_user} />  
         <Escrever />
-        <Route path="/timeline">
-        <Timeline posts='timeline' />
+        <Timeline posts='timeline'/>
+        </PrivateRoute>
+        <PrivateRoute path="/my-posts">
+        <MainLogado usuario={log_user} />
+        <Timeline usuario={log_user}/>
+        </PrivateRoute>
+        <Route path="/login">
+        <Login />
         </Route>
-        <Route path="/my-posts">
-        <Timeline usuario='felipenick'/>
+        <Route path="/logout">
+        <Logout />
         </Route>
+        <Route path="/">
+        <Login />
+        </Route>
+        </Switch>
       </BrowserRouter>
       </div>
-    </div>
   );
 }
 
